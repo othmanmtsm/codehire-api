@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 class SignInController extends Controller
 {
     public function __invoke(Request $request){
+        $this->validate($request,[
+            'email' => 'email:rfc,dns',
+            'password' => 'required'
+        ]);
+
         if (!$token = auth()->attempt($request->only('email','password'))) {
             return response(null,401);
         }

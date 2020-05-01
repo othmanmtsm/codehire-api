@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        DB::insert("insert into roles values(1,'freelancer')");
+        $user = factory(App\User::class)->create();
+        DB::insert('insert into role_user values (?,?)',[$user->id,1]);
     }
 }

@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::insert("insert into roles values(1,'freelancer')");
+        DB::insert("insert into roles values(2,'client')");
         $user = factory(App\User::class)->create();
         DB::insert('insert into role_user values (?,?)',[$user->id,1]);
     }

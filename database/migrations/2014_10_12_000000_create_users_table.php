@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('tel');
             $table->string('username')->nullable();
             $table->string('avatar')->nullable();
+            $table->double('hourly_rate')->default(0);
+            $table->string('availability')->default('available');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -20,14 +20,16 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('pays');
+            $table->string('adresse');
             $table->string('tel');
-            $table->string('username')->nullable();
             $table->string('avatar')->nullable();
-            $table->double('hourly_rate')->default(0);
-            $table->string('availability')->default('available');
+            $table->unsignedBigInteger('id_status');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('id_status')
+                    ->references('id')
+                    ->on('statuses');
         });
     }
 

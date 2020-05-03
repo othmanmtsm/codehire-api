@@ -14,12 +14,12 @@ class CreateFreelancersTable extends Migration
     public function up()
     {
         Schema::create('freelancers', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_user')->unique();
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('avatar');
             $table->double('hourly_rate');
             $table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

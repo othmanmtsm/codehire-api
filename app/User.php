@@ -69,4 +69,8 @@ class User extends Authenticatable implements JWTSubject
     public function status(){
         return $this->belongsTo(Status::class);
     }
+
+    public function freelancer(){
+        return $this->hasOne(Freelancer::class);
+    }
 }

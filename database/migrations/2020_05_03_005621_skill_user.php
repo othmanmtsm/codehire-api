@@ -25,7 +25,7 @@ class SkillUser extends Migration
                     ->onDelete('cascade');
 
             $table->foreign('user_id')
-                    ->references('id_user')
+                    ->references('user_id')
                     ->on('freelancers');
         });
     }

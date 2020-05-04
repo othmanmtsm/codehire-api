@@ -20,6 +20,7 @@ class CreateFreelancersTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->primary('user_id');
         });
     }
 

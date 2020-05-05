@@ -15,8 +15,8 @@ class CreateFreelancersTable extends Migration
     {
         Schema::create('freelancers', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->unique();
-            $table->string('avatar');
-            $table->double('hourly_rate');
+            $table->double('hourly_rate')->nullable();
+            $table->string('username')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

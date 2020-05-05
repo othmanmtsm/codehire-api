@@ -18,13 +18,13 @@ class signUpController extends Controller
         $user->prenom = $request->prenom;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->pays = $request->pays;
+        $user->adresse = $request->addresse;
         $user->tel = $request->tel;
+        $user->id_status = 1;
         $user->save();
         DB::insert('insert into role_user values (?,?)',[$user->id,$request->role]);
         if ($request->role==1) {
-            $user->username = $request->username;
-            $user->save();
+            DB::insert('insert into freelancers(user_id) values(?)',[$user->id]);
         }
         return response()->json([
             'email'=>$user->email,

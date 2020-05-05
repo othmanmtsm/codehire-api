@@ -8,6 +8,10 @@ class Freelancer extends Model
 {
     protected $primaryKey = 'user_id';
 
+    protected $fillable = [
+        'hourly_rate','username'
+    ];
+
     public function user(){
         return $this->belongsTo(User::class);
     }
@@ -22,5 +26,9 @@ class Freelancer extends Model
 
     public function categories(){
         return $this->belongsToMany(Category::class,'category_freelancer','category_id','freelancer_id');
+    }
+
+    public function skills(){
+        return $this->belongsToMany(Skill::class,'skill_user','user_id','skill_id');
     }
 }

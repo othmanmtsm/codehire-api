@@ -14,9 +14,18 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Freelancer $freelancer)
     {
-        //
+        return response()->json([
+            'username' => $freelancer->username,
+            'title' => $freelancer->title,
+            'hourlyrate' => $freelancer->hourly_rate,
+            'avatar' => $freelancer->user->avatar,
+            'member_since' => $freelancer->user->created_at->format('M d Y'),
+            'skills' => $freelancer->skills,
+            'categories' => $freelancer->categories,
+            'experience' => $freelancer->experience
+        ]);
     }
 
     /**
@@ -38,7 +47,9 @@ class ProfileController extends Controller
     public function store(Freelancer $freelancer,Request $request)
     {
         $user = $freelancer->user;
+        $freelancer->update(['hourly_rate'=>$request->hourlyrate]);
         $freelancer->update(['username'=>$request->username]);
+        $freelancer->update(['title'=>$request->title]);
         if ($request->has('avatar')) {
             $user->update(['avatar' => $request->avatar->store('images','public')]);
         }
@@ -54,7 +65,7 @@ class ProfileController extends Controller
                 DB::insert("insert into category_freelancer(category_id,freelancer_id) values(?,?)",[$category,$freelancer->user_id]);
             }
         }
-        return response('created',201);
+        return $request;
     }
 
     /**

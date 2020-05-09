@@ -14,7 +14,13 @@ class DatabaseSeeder extends Seeder
     {
         DB::insert("insert into roles values(1,'freelancer')");
         DB::insert("insert into roles values(2,'client')");
-        $user = factory(App\User::class)->create();
-        DB::insert('insert into role_user values (?,?)',[$user->id,1]);
+        DB::insert("insert into skills values(1,'php')");
+        DB::insert("insert into skills values(2,'javascript')");
+        DB::insert("insert into skills values(3,'nodejs')");
+        DB::insert("insert into skills values(4,'mongo')");
+        DB::insert("insert into categories values(1,'Programmation')");
+        DB::insert("insert into categories values(2,'UI/UX Design')");
+        DB::insert("insert into categories values(3,'Mobile dev')");
+        DB::insert("insert into statuses values(1,'Available')");
     }
 }

@@ -9,7 +9,7 @@ class Freelancer extends Model
     protected $primaryKey = 'user_id';
 
     protected $fillable = [
-        'hourly_rate','username'
+        'hourly_rate','username','title'
     ];
 
     public function user(){

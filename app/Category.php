@@ -9,4 +9,8 @@ class Category extends Model
     public function freelancers(){
         return $this->belongsToMany(Freelancer::class,'category_freelancer','category_id','freelancer_id');
     }
+
+    public function projects(){
+        return $this->hasMany(Project::class);
+    }
 }

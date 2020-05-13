@@ -70,4 +70,8 @@ class User extends Authenticatable implements JWTSubject
     public function freelancer(){
         return $this->hasOne(Freelancer::class);
     }
+
+    public function client(){
+        return $this->hasOne(Client::class);
+    }
 }

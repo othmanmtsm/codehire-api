@@ -24,7 +24,8 @@ class ProfileController extends Controller
             'member_since' => $freelancer->user->created_at->format('M d Y'),
             'skills' => $freelancer->skills,
             'categories' => $freelancer->categories,
-            'experience' => $freelancer->experience
+            'experience' => $freelancer->experience,
+            'certifications' => $freelancer->certifications
         ]);
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -14,7 +15,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        return Project::all();
     }
 
     /**
@@ -35,7 +36,23 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $project = new Project;
+        $project->category_id = $request->category;
+        $project->date_limit = $request->date_lim;
+        $desc = serialize($request->description);
+        $project->description = $desc;
+        $project->payment_max = $request->pay_max;
+        $project->payment_min = $request->pay_min;
+        $project->payment_type = $request->payment;
+        $skills = $request->skills;
+        $project->client_id = auth()->user->id;
+        $project->titre = $request->titre;
+        $project->save();
+        $id = $project->id;
+        foreach ($skills as $skill) {
+            DB::insert('insert into project_skill values(?,?)',[$skill,$id]);
+        }
+        return response('created', 201);
     }
 
     /**
@@ -46,7 +63,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return $project;
     }
 
     /**

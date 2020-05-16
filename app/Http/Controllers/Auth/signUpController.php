@@ -25,6 +25,8 @@ class signUpController extends Controller
         DB::insert('insert into role_user values (?,?)',[$user->id,$request->role]);
         if ($request->role==1) {
             DB::insert('insert into freelancers(user_id) values(?)',[$user->id]);
+        }else if ($request->role==2) {
+            DB::insert('insert into clients(user_id) values(?)',[$user->id]);
         }
         return response()->json([
             'email'=>$user->email,

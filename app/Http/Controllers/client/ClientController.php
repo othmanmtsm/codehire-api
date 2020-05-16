@@ -14,18 +14,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return Client::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +26,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -46,7 +37,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return $client;
     }
 
     /**
@@ -69,7 +60,15 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $user = $client->user;
+        $user->update(['avatar' => $request->avatar->store('images','public')]);
+        if ($request->has('organisation')) {
+            $client->update(['organisation'=>$request->organisation]);
+        }
+        if ($request->has('nb_emp')) {
+            $client->update(['nb_employees'=>$request->nb_emp]);
+        }
+        return response('created', 201);
     }
 
     /**

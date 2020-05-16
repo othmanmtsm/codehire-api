@@ -14,7 +14,7 @@ class FreelancerController extends Controller
      */
     public function index()
     {
-        //
+        return Freelancer::all();
     }
 
     /**
@@ -46,7 +46,7 @@ class FreelancerController extends Controller
      */
     public function show(Freelancer $freelancer)
     {
-        //
+        return $freelancer;
     }
 
     /**

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $fillable = [
-        'date_limit', 'description', 'payment_min', 'payment_max', 'unavailable_at', 'payment_type', 'category_id', 'client_id'
+        'date_limit', 'description', 'payment_min', 'payment_max', 'unavailable_at', 'payment_type', 'category_id', 'client_id','titre'
     ];
 
     public function client(){
@@ -20,5 +20,9 @@ class Project extends Model
 
     public function paymentType(){
         return $this->belongsTo(PaymentType::class,'payment_type','id');
+    }
+
+    public function skills(){
+        return $this->belongsToMany(Skill::class, 'project_skill', 'project_id', 'skill_id');
     }
 }

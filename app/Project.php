@@ -25,4 +25,13 @@ class Project extends Model
     public function skills(){
         return $this->belongsToMany(Skill::class, 'project_skill', 'project_id', 'skill_id');
     }
+
+    public function freelancers(){
+        return $this->belongsToMany(Freelancer::class, 'project_freelancer', 'project_id', 'freelancer_id')->withPivot('amount','duration','description','isHired','hours_worked');
+    }
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Freelancer::class, 'tasks', 'project_id', 'freelancer_id')->withPivot('freelancer_id','project_id','task','stage');
+    }
 }

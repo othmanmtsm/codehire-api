@@ -18,6 +18,7 @@ class CreateFreelancersTable extends Migration
             $table->double('hourly_rate')->nullable();
             $table->string('username')->nullable();
             $table->string('title')->nullable();
+            $table->text('bio')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use App\Client;
 use Illuminate\Http\Request;
@@ -79,6 +80,31 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->user->delete();
+        $client->delete();
+        return response('deleted', 204);
+    }
+
+    public function getProjects(){
+        $projects = auth()->user()->client->projects;
+        $response = [];
+        $bids = 0;
+        foreach ($projects as $p) {
+            foreach ($p->freelancers as $f) {
+                $bids++;
+            }
+            $response[] = array(
+                'project_id' => $p->id,
+                'project_name' => $p->titre,
+                'bidders' => $bids,
+                'days_left' => date_diff(date_create(date('Y-m-d')),date_create($p->date_limit))->format('%R%a jours restants'),
+                'price_min' => $p->payment_min,
+                'price_max' => $p->payment_max,
+                'payment_type' => $p->paymentType->label,
+                'offres' => DB::select('select a.*,b.username,c.avatar from project_freelancer a join freelancers b on a.freelancer_id=b.user_id join users c on b.user_id=c.id where a.project_id=?',[$p->id])
+            );
+            $bids = 0;
+        }
+        return response()->json($response);
     }
 }

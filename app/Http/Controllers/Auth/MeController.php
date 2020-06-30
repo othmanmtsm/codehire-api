@@ -18,7 +18,8 @@ class MeController extends Controller
              'id' => $user->id,
              'email' => $user->email,
              'name' => $user->nom,
-             'avatar' => $user->avatar
+             'avatar' => $user->avatar,
+             'roles' => $user->roles
          ]);
      }
 }

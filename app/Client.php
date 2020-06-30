@@ -19,4 +19,8 @@ class Client extends Model
     public function projects(){
         return $this->hasMany(Project::class,'client_id','user_id');
     }
+
+    public function reviews(){
+        return $this->belongsToMany(Freelancer::class, 'freelancer_reviews', 'client_id', 'freelancer_id')->withPivot('id','review', 'rating');
+    }
 }

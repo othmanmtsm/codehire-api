@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SkillController extends Controller
 {
@@ -35,7 +36,8 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::insert("insert into skills(skill_name) values(?)",[$request->skill]);
+        return response('created', 200);
     }
 
     /**
@@ -55,9 +57,10 @@ class SkillController extends Controller
      * @param  \App\Skill  $skill
      * @return \Illuminate\Http\Response
      */
-    public function edit(Skill $skill)
+    public function edit(Skill $skill, Request $request)
     {
-        //
+        DB::update("update skills set skill_name=? where id=?",[$request->skill, $skill->id]);
+        return response('updated',201);
     }
 
     /**
@@ -80,6 +83,7 @@ class SkillController extends Controller
      */
     public function destroy(Skill $skill)
     {
-        //
+        DB::delete("delete from skills where id=?",[$skill->id]);
+        return response('deleted', 204);
     }
 }
